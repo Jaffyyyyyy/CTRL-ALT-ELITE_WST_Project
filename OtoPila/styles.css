@@ -1,0 +1,198 @@
+:root {
+    --otopila-primary-dark: #293C71;
+    --otopila-primary-muted: #5C729C;
+    --otopila-text-dark: #101B38;
+    --otopila-accent-light: #C7D6E8;
+    --otopila-background-light: #FFFFFF;
+    --otopila-text-light: #FFFFFF;
+    --otopila-secondary-gray: #7A7A7A;
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--otopila-background-light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: var(--otopila-text-dark);
+}
+
+main {
+    flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: sans-serif;
+    color: var(--otopila-primary-dark);
+}
+
+.navbar {
+    padding: 1rem;
+}
+
+.footer {
+    padding: 2rem 1rem;
+    background-color: var(--otopila-primary-muted);
+    color: var(--otopila-accent-light);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--otopila-primary-muted);
+    border-color: var(--otopila-text-dark);
+    color: var(--otopila-text-light);
+}
+
+
+
+.section-separator {
+    border: 0;
+    height: 1px;
+    background-color: var(--otopila-secondary-gray);
+    margin: 0 auto 3rem auto;
+    width: 100%;
+    position: relative;
+    z-index: 11;
+}
+
+.hero, .features, .why-us, .queue-display, .join-queue, .testimonials, .login-section, .main-content {
+    padding: 4rem 1rem;
+}
+
+.hero {
+    background-color: var(--otopila-background-light);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.feature-item {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.feature-item h3 {
+    color: var(--otopila-primary-dark);
+}
+
+.why-us {
+    background-color: var(--otopila-accent-light);
+}
+
+.queue-display {
+    text-align: center;
+}
+
+.queue-boxes-container {
+    border: 1px solid var(--otopila-secondary-gray);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.queue-now-serving {
+    background-color: var(--otopila-primary-dark);
+    color: var(--otopila-accent-light);
+    border: 1px solid var(--otopila-text-dark);
+}
+
+.queue-next {
+    background-color: var(--otopila-secondary-gray);
+    color: var(--otopila-text-dark);
+    border: 1px solid var(--otopila-text-dark);
+}
+
+.booking-container {
+    background-color: var(--otopila-background-light);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+
+
+.homepage-car {
+    display: block;
+    width: 150%;
+    height: auto;
+    margin-top: -50px;
+    margin-bottom: -100px;
+    margin-left: -150px;
+    z-index: 10;
+    position: relative;
+}
+
+.btn-primary:hover {
+    background-color: var(--otopila-primary-dark);
+    border-color: var(--otopila-primary-dark);
+}
+
+.nav-link:hover {
+    color: var(--otopila-primary-dark);
+}
+
+.nav-separator {
+    display: inline-block;
+    width: 1px;
+    height: 2em;
+    background-color: var(--otopila-primary-muted);
+    margin: 0 0.5rem;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+.queue-now-serving p,
+.queue-now-serving h2 {
+    color: var(--otopila-text-light);
+}
+
+.queue-next p,
+.queue-next h2 {
+    color: var(--otopila-text-light);
+}
+
+.queue-display-small {
+    padding: 2rem;
+    text-align: center;
+    margin-left: auto;
+}
+
+.queue-display-small h2 {
+    font-size: 1.5rem;
+}
+
+.queue-display-small .small-text {
+    font-size: 0.85rem;
+}
+
+.queue-display-small .small-heading {
+    font-size: 1.8rem;
+}
+
+.checklist-image {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--otopila-secondary-gray);
+    color: var(--otopila-text-light);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    z-index: 1000;
+}

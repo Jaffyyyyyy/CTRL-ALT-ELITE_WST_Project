@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OtoPila - Smart Queue for Car Care</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body id="top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="Images/OtoPilaLogo.png" alt="OtoPila Logo" style="height: 150px;"></a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><span class="nav-link fw-bold">Home</span></li>
+                    <span class="nav-separator"></span>
+                    <li class="nav-item"><a class="nav-link" href="#join-queue-section">Join Queue</a></li>
+                    <span class="nav-separator"></span>
+                    <li class="nav-item"><a class="nav-link" href="manage-booking.html">Manage Booking</a></li>
+                    <span class="nav-separator"></span>
+                    <li class="nav-item"><a class="nav-link" href="advisor-portal.html">Advisor Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1>Smart Queue for Car Care</h1>
+                        <p>Your web-based queue management system for car maintenance centers that provides remote appointment booking, real-time service updates, and streamlined workflow management.</p>
+                        <a href="#join-queue-section" class="btn btn-primary">GET STARTED</a>
+                    </div>
+                    <div class="col-md-6 car-image-container">
+                        <img src="Images/homepagecarHD.jpg" alt="OtoPila Car" class="homepage-car">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <hr class="section-separator">
+
+        <section class="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 feature-item">
+                        <h3>Easy Online Booking</h3>
+                        <p>Schedule your car service from anywhere, anytime.</p>
+                    </div>
+                    <div class="col-md-4 feature-item">
+                        <h3>Real-Time Service Updates</h3>
+                        <p>Stay informed with live notifications about your car's service progress.</p>
+                    </div>
+                    <div class="col-md-4 feature-item">
+                        <h3>Smarter Workflow Management</h3>
+                        <p>Experience faster, more organized service.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-us">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h2>Why choose OtoPila?</h2>
+                        <p>AutoPila transforms car maintenance from a frustrating, time-consuming experience into a smooth, predictable service.</p>
+                        <a href="#join-queue-section" class="btn btn-secondary">GET IN LINE</a>
+                    </div>
+                    <div class="col-md-6">
+                         <img src="Images/ChecklistImage.jpg" alt="Checklist" class="checklist-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="queue-display">
+            <div class="container">
+                <h2>Public Queue Display</h2>
+                <div class="queue-boxes-container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="p-5 mb-4 rounded-3 queue-now-serving">
+                                <p>NOW SERVING</p>
+                                <h2>A-101</h2>
+                                <p>Service Bay 1</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-5 mb-4 rounded-3 queue-next">
+                                <p>NEXT IN QUEUE</p>
+                                <h2>A-102</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-separator">
+
+        <section id="join-queue-section" class="join-queue">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h2>Get in Line</h2>
+                        <p>Book Your Service Slot</p>
+                        <form action="manage-booking.html">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Full Name">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email address">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Car Plate Number">
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select">
+                                    <option selected>Select a service...</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Join Queue</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-separator">
+
+        <section class="testimonials">
+            <div class="container text-center">
+                <h2>Testimonials</h2>
+                <p>"I didn't have to wait long at all!" - Myk A.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2025 WST G6. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <a href="#top" id="backToTopBtn" class="back-to-top">&uarr;</a>
+</body>
+</html>
