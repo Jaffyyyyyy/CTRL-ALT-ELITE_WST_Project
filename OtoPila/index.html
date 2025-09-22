@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding -->
     <meta charset="UTF-8">
+    <!-- Responsive scaling -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OtoPila - Smart Queue for Car Care</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     
 </head>
 <body id="top">
-
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
+            <!-- Logo -->
             <a class="navbar-brand" href="index.html"><img src="Images/OtoPilaLogo.png" alt="OtoPila Logo" style="height: 150px;"></a>
+            <!-- Menu Items -->
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><span class="nav-link fw-bold">Home</span></li>
@@ -28,82 +36,95 @@
     </nav>
 
     <main>
+        <!-- Hero Section -->
         <header class="hero">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-6">
+                    <!--Hero Text-->
+                    <div class="col-md-6 order-2 order-md-1"> <!--This hero will appear second on small screens (order-2) but will appear first on medium screens and above (order-md-1)-->
                         <h1>Smart Queue for Car Care</h1>
                         <p>Your web-based queue management system for car maintenance centers that provides remote appointment booking, real-time service updates, and streamlined workflow management.</p>
                         <a href="#join-queue-section" class="btn btn-primary">GET STARTED</a>
                     </div>
-                    <div class="col-md-6 car-image-container">
-                        <img src="Images/homepagecarHD.jpg" alt="OtoPila Car" class="homepage-car">
+                    <!--Hero Image-->
+                    <div class="col-md-6 order-1 order-md-2"> <!--This hero image will appear first on small screens (order-1) but will appear second on medium screens and above (order-md-2)-->
+                        <img src="Images\home-page-car-white-1920px.png" alt="OtoPila Car" class="img-fluid homepage-car">
                     </div>
                 </div>
             </div>
         </header>
-
+        <!-- Section Separator -->
         <hr class="section-separator">
-
+        <!-- Features Section -->
         <section class="features">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 feature-item">
+                    <!-- Feature 1 -->
+                    <div class="col-md-4 feature-item text-center">
+                        <i class="fas fa-check feature-icon" aria-label="Check Icon"></i>
                         <h3>Easy Online Booking</h3>
                         <p>Schedule your car service from anywhere, anytime.</p>
                     </div>
-                    <div class="col-md-4 feature-item">
+                    <!-- Feature 2 -->
+                    <div class="col-md-4 feature-item text-center">
+                        <i class="far fa-clock feature-icon" aria-label="Time Icon"></i>
                         <h3>Real-Time Service Updates</h3>
                         <p>Stay informed with live notifications about your car's service progress.</p>
                     </div>
-                    <div class="col-md-4 feature-item">
+                    <!-- Feature 3 -->
+                    <div class="col-md-4 feature-item text-center">
+                        <i class="far fa-star feature-icon" aria-label="Star Icon"></i>
                         <h3>Smarter Workflow Management</h3>
                         <p>Experience faster, more organized service.</p>
                     </div>
                 </div>
             </div>
         </section>
-
+        <!-- Why Us Section -->
         <section class="why-us">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-6">
+                    <!-- Text -->
+                    <div class="col-md-6 order-2 order-md-1">
                         <h2>Why choose OtoPila?</h2>
                         <p>AutoPila transforms car maintenance from a frustrating, time-consuming experience into a smooth, predictable service.</p>
                         <a href="#join-queue-section" class="btn btn-secondary">GET IN LINE</a>
                     </div>
-                    <div class="col-md-6">
-                         <img src="Images/ChecklistImage.jpg" alt="Checklist" class="checklist-image">
+                    <!-- Image -->
+                    <div class="col-md-6 order-1 order-md-2">
+                         <img src="Images\home-checklist-car-red-600px.png" alt="Checklist" class="img-fluid checklist-image">
                     </div>
                 </div>
             </div>
         </section>
-
+        <!-- Queue Display Section -->
         <section class="queue-display">
             <div class="container">
                 <h2>Public Queue Display</h2>
                 <div class="queue-boxes-container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="p-5 mb-4 rounded-3 queue-now-serving">
-                                <p>NOW SERVING</p>
-                                <h2>A-101</h2>
-                                <p>Service Bay 1</p>
+                    <div class="row justify-content-center align-items-stretch">
+                        <!-- Now Serving -->
+                        <div class="col-md-6 d-flex">
+                            <div class="p-5 rounded-3 queue-now-serving flex-fill">
+                                <p class="queue-now-serving-txt">NOW SERVING</p>
+                                <h2 class="queue-number">A-101</h2>
+                                <p class="queue-info">Service Bay 1</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="p-5 mb-4 rounded-3 queue-next">
-                                <p>NEXT IN QUEUE</p>
-                                <h2>A-102</h2>
+                        <!-- Next in Queue -->
+                        <div class="col-md-6 d-flex">
+                            <div class="p-5 rounded-3 queue-next flex-fill">
+                                <p class="queue-next-txt">NEXT IN QUEUE</p>
+                                <h2 class="queue-next-number">A-102</h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
+        <!-- Section Separator -->
         <hr class="section-separator">
-
+        <!-- Join Queue Form -->
         <section id="join-queue-section" class="join-queue">
             <div class="container">
                 <div class="row justify-content-center">
@@ -131,9 +152,9 @@
                 </div>
             </div>
         </section>
-
+        <!-- Section Separator -->
         <hr class="section-separator">
-
+        <!-- Testimonials -->
         <section class="testimonials">
             <div class="container text-center">
                 <h2>Testimonials</h2>
@@ -141,14 +162,15 @@
             </div>
         </section>
     </main>
-
+    <!-- Footer -->
     <footer class="footer">
         <div class="container text-center">
             <p>&copy; 2025 WST G6. All rights reserved.</p>
         </div>
     </footer>
-
+    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Back to Top Button -->
     <a href="#top" id="backToTopBtn" class="back-to-top">&uarr;</a>
 </body>
 </html>

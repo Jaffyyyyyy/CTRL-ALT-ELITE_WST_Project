@@ -12,5 +12,6 @@ Public Queue Display Section:
 #101B38 - border
 #293C71 - Now Serving bg
 #C7D6E8 - Font colour for Now Serving
-#7A7A7A - Next in cue bg
+#9B9B9B - Next in cue bg
 #101B38 - Font colour for Next in Queue
+#FEDC97 - Font colour for icons 
