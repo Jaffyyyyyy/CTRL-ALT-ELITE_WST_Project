@@ -1,0 +1,17 @@
+#293C71 - Menu, title, color for the icons (easy online booking, real time, service updates, smarter workflow management), button color for 'Join Queue' section only.
+
+#101B38 - small texts, liner/border for buttons
+
+#5C729C - buttons, footer
+
+#C7D6E8 - footer font, page background for the 'Why Choose OtoPila' section
+
+#FFFFFF - page background, font color for buttons and icons
+
+Public Queue Display Section:
+#101B38 - border
+#293C71 - Now Serving bg
+#C7D6E8 - Font colour for Now Serving
+#9B9B9B - Next in cue bg
+#101B38 - Font colour for Next in Queue
+#FEDC97 - Font colour for icons 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding -->
+    <meta charset="UTF-8">
+    <!-- Responsive scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Booking - OtoPila</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/styles.css">
+    
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="images/OtoPilaLogo.png" alt="OtoPila Logo" style="height: 150px;"></a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <span class="nav-separator"></span>
+                <li class="nav-item"><a class="nav-link" href="index.html#join-queue-section">Join Queue</a></li>
+                <span class="nav-separator"></span>
+
+                <li class="nav-item"><span class="nav-link fw-bold">Manage Booking</span></li>
+                <span class="nav-separator"></span>
+                <li class="nav-item"><a class="nav-link" href="advisor-portal.html">Advisor Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Main -->
+    <main class="main-content">
+        <div class="container">
+            <div class="row">
+                <!-- Booking details -->
+                <div class="col-md-5">
+                    <h2 class="mb-4">Manage Your Booking</h2>
+                    <div class="booking-container">
+                        <h4>Your Active Booking</h4>
+                        <hr>
+                        <div class="mt-4">
+                            <p><strong>Queue Number:</strong> A-102</p>
+                            <p><strong>Service:</strong> Premium Car Wash</p>
+                            <p><strong>Status:</strong> <span class="badge bg-warning text-dark">In Queue</span></p>
+                            <p class="text-muted mt-3">There are 5 people ahead of you.</p>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-primary me-2">Reschedule</button>
+                            <button class="btn btn-outline-danger">Cancel Booking</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Queue display -->
+                <div class="col-md-7">
+                    <div class="queue-display-small">
+                        <h2>Public Queue Display</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 mb-3 rounded-3 queue-now-serving">
+                                    <p class="small-text">NOW SERVING</p>
+                                    <h2 class="small-heading">A-101</h2>
+                                    <p class="small-text">Service Bay 1</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 mb-3 rounded-3 queue-next">
+                                    <p class="small-text">NEXT IN QUEUE</p>
+                                    <h2 class="small-heading">A-102</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 WST G6. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Placeholder for future JavaScript functionality -->
+    <!-- Scripts will be added here to handle dynamic interactions -->
+    <script src="scripts/manage-booking.js"></script> <!-- Placeholder for manage booking JavaScript file -->
+</body>
+</html>
