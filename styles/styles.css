@@ -275,3 +275,53 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     box-shadow: var(--shadow-sm);
     z-index: 1000;
 }
+
+/* Custom button color for the dashboard */
+.otopila-btn-dark-blue {
+    background-color: var(--otopila-text-dark);
+    border-color: var(--otopila-text-dark);
+}
+
+/* Hover state for the custom button */
+.otopila-btn-dark-blue:hover {
+    background-color: var(--otopila-primary-dark);
+    border-color: var(--otopila-primary-dark);
+}
+
+/* Background color utility for the appointment count badge */
+.otopila-bg-dark-blue {
+    background-color: var(--otopila-text-dark);
+}
+
+/* Styles the active tab with a colored underline */
+.nav-tabs .nav-link.active {
+    border-bottom-color: var(--otopila-primary-dark);
+    color: var(--otopila-primary-dark);
+    border-width: 2px;
+}
+
+/* Base style for all status badges in the table */
+.status-tag {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Color for "Waiting" status */
+.status-waiting {
+    background-color: #fd7e14; /* Orange */
+    color: #000;
+}
+
+/* Color for "In Service" status */
+.status-in-service {
+    background-color: #20c997; /* Teal */
+    color: #000;
+}
+
+/* Color for "Completed" status */
+.status-completed {
+    background-color: #6c757d; /* Gray */
+    color: #000;
+}
