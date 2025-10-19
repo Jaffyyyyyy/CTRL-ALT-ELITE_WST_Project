@@ -1,0 +1,306 @@
+:root { 
+    --otopila-primary-dark: #293C71;
+    --otopila-primary-muted: #5C729C;
+    --otopila-text-dark: #101B38;
+    --otopila-accent-light: #C7D6E8;
+    --otopila-background-light: #FFFFFF;
+    --otopila-text-light: #FFFFFF;
+    --otopila-secondary-gray: #9B9B9B;
+    --otopila-caramel: #FEDC97;
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; }
+main { display: block; }
+.container { max-width: 1100px; }
+
+
+body {
+    font-family: sans-serif;
+    background-color: var(--otopila-background-light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: var(--otopila-text-dark);
+}
+
+main { 
+    flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: sans-serif;
+    color: var(--otopila-primary-dark);
+}
+
+.navbar {
+    padding: 1rem;
+}
+
+.footer {
+    padding: 2rem 1rem;
+    background-color: var(--otopila-primary-muted);
+    color: var(--otopila-accent-light);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--otopila-primary-muted);
+    border-color: var(--otopila-text-dark);
+    color: var(--otopila-text-light);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    background-color: var(--otopila-primary-dark);
+    border-color: var(--otopila-primary-dark);
+    color: var(--otopila-caramel);
+}
+
+
+.section-separator {
+    border: 0;
+    height: 1px;
+    background-color: var(--otopila-secondary-gray);
+    margin: 0 auto 3rem auto;
+    width: 100%;
+    position: relative;
+    z-index: 11;
+}
+
+.hero, .features, .why-us, .queue-display, .join-queue, .testimonials, .login-section, .main-content {
+    padding: 4rem 1rem;
+}
+
+.hero {
+    background-color: var(--otopila-background-light);  
+}
+
+.hero h1 {
+    flex: 1;
+    font-size: clamp(2.5rem, 5vw, 3rem);
+    font-weight: bold;
+}
+
+.homepage-car {
+    max-width: 100%;
+    height: auto; 
+    display: block;
+    margin: 0 auto;
+}
+
+.checklist-image {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.feature-item {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.feature-icon {
+    font-size: 30px;
+    color: var(--otopila-caramel);
+    padding: 15px 15px;
+    border: none;
+    border-radius: 10px; 
+    background-color: var(--otopila-primary-dark);
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto 20px;
+}
+
+.feature-item h3 { 
+    color: var(--otopila-primary-dark);
+}
+
+.why-us {
+    background-color: var(--otopila-accent-light);
+}
+
+.queue-display {
+    text-align: center;
+}
+
+.queue-boxes-container {
+    border: 1px solid var(--otopila-secondary-gray);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.queue-now-serving {
+    background-color: var(--otopila-primary-dark);
+    color: var(--otopila-accent-light);
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    margin-left: 0.5rem;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-weight: 500;
+    text-align: center;
+}
+
+.queue-number {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.queue-info {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 500;
+}
+
+
+.queue-next {
+    background-color: var(--otopila-secondary-gray);
+    border-radius: 0.5rem;
+    padding: 1rem 1rem 0.5rem 1rem;
+    margin-top: 0.25rem;
+    margin-bottom: 4rem;
+    margin-left: auto;
+    margin-right: 0.5rem;
+}
+
+.queue-next-txt {
+    color: var(--otopila-text-dark);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: bold; 
+    text-align: center;
+    margin-bottom: 0.2rem; 
+}
+
+.queue-next-number {
+    color: var(--otopila-text-dark);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: bold;
+    margin-bottom: 0; 
+}
+
+.booking-container {
+    background-color: var(--otopila-background-light);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-link:hover {
+    color: var(--otopila-primary-dark);
+}
+
+.queue-now-serving p,
+.queue-now-serving h2 {
+    color: var(--otopila-text-light);
+}
+
+.queue-next p,
+.queue-next h2 {
+    color: var(--otopila-text-dark);
+}
+
+.queue-display-small {
+    padding: 2rem;
+    text-align: center;
+    margin-left: auto;
+}
+
+.queue-display-small h2 {
+    font-size: 1.5rem;
+}
+
+.queue-display-small .small-text {
+    font-size: 0.85rem;
+}
+
+.queue-display-small .small-heading {
+    font-size: 1.8rem;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom-color: var(--otopila-primary-dark);
+    color: var(--otopila-primary-dark);
+    border-width: 2px;
+}
+
+.status-tag {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-waiting {
+    background-color: #fd7e14;
+    color: #000;
+}
+
+.status-in-service {
+    background-color: #20c997;
+    color: #000;
+}
+
+.status-completed {
+    background-color: #6c757d;
+    color: #000;
+}
+
+#call-next-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(41, 60, 113, 0.25);
+}
+
+#load-demo-data-btn:hover,
+#clear-queue-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.btn-quick-primary {
+    background: var(--otopila-primary-dark, #293C71);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    font-weight: 600;
+    transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.btn-quick-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(41,60,113,0.25);
+}
+.btn-quick-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.btn-quick-outline {
+    background: transparent;
+    color: var(--otopila-primary-dark, #293C71);
+    border: 1.5px solid rgba(41,60,113,0.35);
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    font-weight: 500;
+    transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.btn-quick-outline:hover {
+    background: rgba(41,60,113,0.06);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+.btn-quick-outline:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.btn-quick-danger {
+    color: #dc3545;
+    border-color: rgba(220,53,69,0.45);
+}
+.btn-quick-danger:hover {
+    background: rgba(220,53,69,0.08);
+}
