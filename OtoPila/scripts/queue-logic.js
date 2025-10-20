@@ -24,53 +24,9 @@ const queueService = (() => {
         try {
             localStorage.setItem(QUEUE_KEY, JSON.stringify(state));
             window.dispatchEvent(new Event('storage'));
-            window.dispatchEvent(new CustomEvent('queueUpdated', { detail: state }));
         } catch (error) {
             console.error("Error writing to localStorage:", error);
         }
-    };
-
-    const UNDO_KEY = 'otoPila_undo_snapshot';
-
-    const saveUndoSnapshot = (label, prevState) => {
-        try {
-            const payload = {
-                label: label || 'snapshot',
-                timestamp: new Date().toISOString(),
-                state: prevState
-            };
-            localStorage.setItem(UNDO_KEY, JSON.stringify(payload));
-        } catch (e) {
-            console.error('Failed saving undo snapshot', e);
-        }
-    };
-
-    const getUndoSnapshot = () => {
-        try {
-            const raw = localStorage.getItem(UNDO_KEY);
-            return raw ? JSON.parse(raw) : null;
-        } catch (e) {
-            return null;
-        }
-    };
-
-    const restoreUndoSnapshot = () => {
-        try {
-            const snap = getUndoSnapshot();
-            if (!snap || !snap.state) return false;
-            localStorage.setItem(QUEUE_KEY, JSON.stringify(snap.state));
-            window.dispatchEvent(new Event('storage'));
-            window.dispatchEvent(new CustomEvent('queueUpdated', { detail: snap.state }));
-            localStorage.removeItem(UNDO_KEY);
-            return true;
-        } catch (e) {
-            console.error('Failed to restore undo snapshot', e);
-            return false;
-        }
-    };
-
-    const clearUndoSnapshot = () => {
-        try { localStorage.removeItem(UNDO_KEY); } catch (e) { }
     };
 
     const loadDemoData = (demoCustomers) => {
@@ -220,15 +176,8 @@ const queueService = (() => {
     };
 
     const clearQueue = () => {
-        const prev = getState();
-        saveUndoSnapshot('clear-queue', prev);
         setState(getInitialState());
-        try { window.dispatchEvent(new CustomEvent('oto:queueCleared', { detail: { undoAvailable: true } })); } catch (e) {}
     };
-
-    const getUndo = getUndoSnapshot;
-    const restoreUndo = restoreUndoSnapshot;
-    const clearUndo = clearUndoSnapshot;
 
     return {
         getState,

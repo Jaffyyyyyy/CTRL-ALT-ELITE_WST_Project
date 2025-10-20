@@ -134,8 +134,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('storage', () => {
         renderDashboard();
     });
-
-    window.addEventListener('queueUpdated', () => {
-        renderDashboard();
-    });
 });
