@@ -112,3 +112,9 @@ Date: 2025‑10‑19
 ## Contributing
 
 This is a demo project; contributions are welcome. Keep it dependency-light and avoid adding build steps unless necessary. Match existing code style and prefer small, focused changes.
+
+## AI Assistance
+
+AI assistance was used for the following:
+- Refactoring and implementing of scripts through Learning Agent CHATGPT
+- Grammar for READ.me

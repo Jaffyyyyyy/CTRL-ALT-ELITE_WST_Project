@@ -42,15 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const emailInput = document.getElementById('email');
         const carPlateInput = document.getElementById('carPlate');
 
+        let isValid = true;
         if (!nameInput.value.trim()) {
-            nameInput.focus();
-            return;
+            nameInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            nameInput.classList.remove('is-invalid');
         }
+
         if (carPlateInput && carPlateInput.value && !/^[A-Z]{1,3}-[0-9]{1,4}$/.test(carPlateInput.value)) {
             carPlateInput.classList.add('is-invalid');
-            carPlateInput.focus();
+            isValid = false;
+        } else if (carPlateInput) {
+            carPlateInput.classList.remove('is-invalid');
+        }
+
+        if (!isValid) {
             return;
         }
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerHTML = `
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Joining...
+        `;
 
         const customerData = {
             name: nameInput.value.trim(),
@@ -78,6 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sessionStorage.setItem('myQueueId', newCustomer.id);
 
-        window.location.href = `status.html`;
+        window.location.href = `status.html?new=true`;
     });
 });

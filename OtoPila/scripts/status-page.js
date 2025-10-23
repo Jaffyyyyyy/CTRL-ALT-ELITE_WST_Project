@@ -40,6 +40,22 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('new') === 'true') {
+            const modalElement = document.getElementById('confirmationModal');
+            if (modalElement) {
+                const modalBody = modalElement.querySelector('.modal-body');
+                modalBody.innerHTML = `
+                    <p class="lead">You have successfully joined the queue.</p>
+                    <p>Your queue number is:</p>
+                    <p class="display-4 fw-bold text-primary">${myCustomer.queueNumber}</p>
+                `;
+                const modal = new bootstrap.Modal(modalElement);
+                modal.show();
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+
         userQueueNumberEl.textContent = myCustomer.queueNumber;
 
         if (myCustomer.status === 'In Service') {

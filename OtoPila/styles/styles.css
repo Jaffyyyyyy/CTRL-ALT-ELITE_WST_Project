@@ -8,6 +8,7 @@
     --otopila-secondary-gray: #9B9B9B;
     --otopila-caramel: #FEDC97;
     --shadow-sm: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+    --shadow-md: 0 0.5rem 1rem rgba(0,0,0,.15);
 }
 
 * { box-sizing: border-box; }
@@ -18,12 +19,13 @@ main { display: block; }
 
 
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--otopila-background-light);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     color: var(--otopila-text-dark);
+    line-height: 1.6;
 }
 
 main { 
@@ -31,25 +33,38 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--otopila-primary-dark);
+    font-weight: 600;
 }
 
 .navbar {
     padding: 1rem;
+    background-color: var(--otopila-background-light);
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid #dee2e6;
 }
 
 .footer {
     padding: 2rem 1rem;
-    background-color: var(--otopila-primary-muted);
+    background-color: var(--otopila-primary-dark);
     color: var(--otopila-accent-light);
     text-align: center;
 }
 
 .btn-primary {
-    background-color: var(--otopila-primary-muted);
-    border-color: var(--otopila-text-dark);
+    background-color: var(--otopila-primary-dark);
+    border-color: var(--otopila-primary-dark);
     color: var(--otopila-text-light);
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--otopila-primary-muted);
+    border-color: var(--otopila-primary-muted);
+    transform: translateY(-2px);
 }
 
 .btn-primary:hover,
@@ -100,6 +115,19 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 .feature-item {
     text-align: center;
     margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: var(--otopila-background-light);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
 }
 
 .feature-icon {
@@ -116,10 +144,12 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 
 .feature-item h3 { 
     color: var(--otopila-primary-dark);
+    margin-top: auto;
 }
 
 .why-us {
     background-color: var(--otopila-accent-light);
+    border-radius: 0.5rem;
 }
 
 .queue-display {
@@ -186,7 +216,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     background-color: var(--otopila-background-light);
     padding: 2rem;
     border-radius: 0.5rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
 }
 
 .nav-link:hover {
