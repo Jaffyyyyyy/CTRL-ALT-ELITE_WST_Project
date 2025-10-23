@@ -334,3 +334,59 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 .btn-quick-danger:hover {
     background: rgba(220,53,69,0.08);
 }
+
+.star-icon {
+    cursor: pointer;
+    color: #6c757d;
+    margin: 0 2px;
+}
+
+.star-rating svg {
+    color: #ffc107;
+}
+
+.testimonial-item .star-rating {
+    justify-content: center;
+}
+
+.review-carousel {
+    position: relative;
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--otopila-background-light);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.carousel-control.prev {
+    left: 15px;
+}
+
+.carousel-control.next {
+    right: 15px;
+}
