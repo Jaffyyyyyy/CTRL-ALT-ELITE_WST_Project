@@ -13,17 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const state = queueService.getState();
         const { customers, nowServing, history } = state;
 
-        let nowServingCustomer = customers.find(c => c.id === nowServing) || null;
-        if (!nowServingCustomer) {
-            nowServingCustomer = customers.find(c => c.status === 'In Service') || null;
+        const waitingCustomers = customers.filter(c => c.status === 'Waiting');
+        
+        let nowServingCustomer = customers.find(c => c.id === nowServing) || customers.find(c => c.status === 'In Service') || waitingCustomers[0] || null;
+        
+        let nextCustomerInQueue = null;
+        if (nowServingCustomer) {
+            if (nowServingCustomer.status === 'Waiting') {
+                nextCustomerInQueue = waitingCustomers.find(c => c.id !== nowServingCustomer.id) || null;
+            } else {
+                nextCustomerInQueue = waitingCustomers[0] || null;
+            }
+        } else {
+            nextCustomerInQueue = waitingCustomers.length > 1 ? waitingCustomers[1] : null;
         }
-        if (!nowServingCustomer) {
-            nowServingCustomer = customers.find(c => c.status === 'Waiting') || null;
-        }
-        const nextCustomer = customers.find(c => c.status === 'Waiting');
 
         nowServingEl.textContent = nowServingCustomer ? nowServingCustomer.queueNumber : '---';
-        nextInQueueEl.textContent = nextCustomer ? nextCustomer.queueNumber : '---';
+        nextInQueueEl.textContent = nextCustomerInQueue ? nextCustomerInQueue.queueNumber : '---';
 
         const waitingCount = customers.filter(c => c.status === 'Waiting').length;
         const inServiceCount = customers.filter(c => c.status === 'In Service').length;
@@ -39,6 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
             customers.forEach(customer => {
                 const row = document.createElement('tr');
                 const statusBadge = getStatusBadge(customer.status);
+                const statusOptions = customer.status === 'In Service'
+                    ? `<option value="In Service" selected>In Service</option>
+                       <option value="Completed">Completed</option>`
+                    : `<option value="Waiting" ${customer.status === 'Waiting' ? 'selected' : ''}>Waiting</option>
+                       <option value="In Service" ${customer.status === 'In Service' ? 'selected' : ''}>In Service</option>
+                       <option value="Completed" ${customer.status === 'Completed' ? 'selected' : ''}>Completed</option>`;
+
                 row.innerHTML = `
                     <td class="p-3">
                         <div class="fw-bold">${customer.queueNumber}</div>
@@ -49,9 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td class="p-3 align-middle text-center">${statusBadge}</td>
                     <td class="p-3 align-middle text-center">
                         <select class="form-select form-select-sm status-select" data-id="${customer.id}">
-                            <option value="Waiting" ${customer.status === 'Waiting' ? 'selected' : ''}>Waiting</option>
-                            <option value="In Service" ${customer.status === 'In Service' ? 'selected' : ''}>In Service</option>
-                            <option value="Completed" ${customer.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                            ${statusOptions}
                         </select>
                     </td>
                     <td class="p-3 align-middle text-center">
