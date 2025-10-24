@@ -33,7 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
         5: [
             "Absolutely fantastic!",
             "Exceeded all expectations!",
-            "Outstanding service!"
+            "Outstanding service!",
+            "I didn't have to wait long at all!",
+            "A fantastic experience!",
+            "Transparent and easy."
         ]
     };
 
