@@ -102,12 +102,16 @@ Date: 2025‑10‑19
 
 ## Troubleshooting
 
-- "Now Serving" is blank
-	- With the latest scripts, it should show the current "In Service" queue number or `---` when none is active.
+- “Now Serving” is blank
+	- With the latest scripts, it should show the current “In Service” queue number or `---` when none is active.
 	- Ensure `scripts/queue-logic.js`, `scripts/status-page.js`, and `scripts/advisor-dashboard.js` are not cached (hard refresh).
 
 - Resetting the app state
-	- Clear the browser's localStorage or click "Clear Queue" in the Advisor Dashboard.
+	- Clear the browser’s localStorage or click “Clear Queue” in the Advisor Dashboard.
+
+## Contributing
+
+This is a demo project; contributions are welcome. Keep it dependency-light and avoid adding build steps unless necessary. Match existing code style and prefer small, focused changes.
 
 ## Credits & Attribution
 
@@ -117,5 +121,10 @@ Stock photos used under the Unsplash License:
 - **Car illustration** - Photo by [Erik McLean](https://unsplash.com/@introspectivedsgn) on Unsplash
 - **Checklist image** - Photo by [C Joyful](https://unsplash.com/@alonly) on Unsplash
 
-For full attribution details, see [OtoPila/CREDITS.md](OtoPila/CREDITS.md).
+For full attribution details, see [CREDITS.md](CREDITS.md).
 
+## AI Assistance
+
+AI assistance was used for the following:
+- Refactoring and implementing of scripts through Learning Agent CHATGPT
+- Grammar for READ.me
