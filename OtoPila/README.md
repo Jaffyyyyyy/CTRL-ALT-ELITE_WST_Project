@@ -113,6 +113,16 @@ Date: 2025‑10‑19
 
 This is a demo project; contributions are welcome. Keep it dependency-light and avoid adding build steps unless necessary. Match existing code style and prefer small, focused changes.
 
+## Credits & Attribution
+
+### Image Assets
+
+Stock photos used under the Unsplash License:
+- **Car illustration** - Photo by [Erik McLean](https://unsplash.com/@introspectivedsgn) on Unsplash
+- **Checklist image** - Photo by [C Joyful](https://unsplash.com/@alonly) on Unsplash
+
+For full attribution details, see [CREDITS.md](CREDITS.md).
+
 ## AI Assistance
 
 AI assistance was used for the following:

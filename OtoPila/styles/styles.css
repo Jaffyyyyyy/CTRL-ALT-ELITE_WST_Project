@@ -48,8 +48,22 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 .footer {
     padding: 2rem 1rem;
     background-color: var(--otopila-primary-dark);
-    color: var(--otopila-accent-light);
+    color: var(--otopila-text-light);
     text-align: center;
+}
+
+.footer p {
+    color: var(--otopila-text-light);
+}
+
+.footer a {
+    color: var(--otopila-accent-light) !important;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--otopila-caramel) !important;
+    text-decoration: underline;
 }
 
 .btn-primary {
