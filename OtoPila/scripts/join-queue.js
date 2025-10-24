@@ -2,7 +2,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     if (!form) return;
 
+    const nameInput = document.getElementById('fullName');
     const carPlateInput = document.getElementById('carPlate');
+
+    const formatAndValidateName = () => {
+        let value = nameInput.value;
+        value = value.replace(/[0-9]/g, '');
+        value = value.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+        nameInput.value = value;
+
+        if (!nameInput.value.trim()) {
+            nameInput.classList.add('is-invalid');
+        } else {
+            nameInput.classList.remove('is-invalid');
+        }
+    };
+
+    if (nameInput) {
+        nameInput.addEventListener('input', formatAndValidateName);
+        nameInput.addEventListener('blur', formatAndValidateName);
+    }
 
     const formatCarPlate = (raw) => {
         if (!raw) return '';
@@ -38,16 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        const nameInput = document.getElementById('fullName');
         const emailInput = document.getElementById('email');
-        const carPlateInput = document.getElementById('carPlate');
+        
+        formatAndValidateName();
 
         let isValid = true;
         if (!nameInput.value.trim()) {
             nameInput.classList.add('is-invalid');
             isValid = false;
-        } else {
-            nameInput.classList.remove('is-invalid');
         }
 
         if (carPlateInput && carPlateInput.value && !/^[A-Z]{1,3}-[0-9]{1,4}$/.test(carPlateInput.value)) {

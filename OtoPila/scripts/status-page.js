@@ -82,6 +82,16 @@ document.addEventListener('DOMContentLoaded', () => {
             userSpecificMessageEl.textContent = `Your service is complete. Thank you for choosing OtoPila!`;
             userSpecificMessageEl.classList.remove('d-none', 'alert-warning', 'alert-danger', 'alert-info');
             userSpecificMessageEl.classList.add('alert-success');
+
+            const reviewModalShown = sessionStorage.getItem('reviewModalShownFor' + myQueueId);
+            if (!reviewModalShown) {
+                const reviewModalElement = document.getElementById('reviewModal');
+                if (reviewModalElement) {
+                    const reviewModal = new bootstrap.Modal(reviewModalElement);
+                    reviewModal.show();
+                    sessionStorage.setItem('reviewModalShownFor' + myQueueId, 'true');
+                }
+            }
         }
     };
 

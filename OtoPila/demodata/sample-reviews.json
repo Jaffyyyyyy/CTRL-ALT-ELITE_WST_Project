@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Myk A.",
+        "rating": 5,
+        "quote": "I didn't have to wait long at all!",
+        "comment": "The auto queue service is incredibly fast and efficient! It saved me so much time and hassle."
+    },
+    {
+        "name": "Sarah K.",
+        "rating": 5,
+        "quote": "Transparent and easy.",
+        "comment": "I loved getting real-time updates on my phone. Knowing exactly where I was in the queue was a game-changer."
+    },
+    {
+        "name": "David L.",
+        "rating": 5,
+        "quote": "A fantastic experience!",
+        "comment": "The staff was friendly and the process was seamless. I'll definitely be using this service again for my next car check-up."
+    }
+]
