@@ -39,6 +39,15 @@
                     <div class="card-body">
                         <h3 class="h5">Manage Bookings</h3>
                         <p class="small text-muted">View and export completed service logs, search bookings, and manage entries.</p>
+                        <div class="mb-3">
+                            <label for="export-format" class="form-label small fw-bold">Please choose export format</label>
+                            <select id="export-format" class="form-select form-select-sm">
+                                <option value="json">JSON</option>
+                                <option value="xlsx">CSV (Excel Compatible)</option>
+                                <option value="docx">Word Document (RTF)</option>
+                                <option value="txt">Text File (TXT)</option>
+                            </select>
+                        </div>
                         <div class="d-grid">
                             <button id="export-log-btn" class="btn btn-outline-primary btn-sm mb-2">Export Service Log</button>
                             <button id="clear-log-btn" class="btn btn-outline-danger btn-sm">Clear Service Log</button>
@@ -50,9 +59,19 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-header d-flex justify-content-between align-items-center p-3" style="background-color: var(--otopila-accent-light);">
                         <h3 class="h6 mb-0 fw-bold" style="color: var(--otopila-primary-dark);">Service Log</h3>
-                        <div class="input-group w-50">
-                            <input id="log-search" type="search" class="form-control form-control-sm" placeholder="Search history...">
-                            <button id="search-clear" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                        <div class="d-flex gap-2 align-items-center">
+                            <select id="sort-by" class="form-select form-select-sm" style="width: auto;">
+                                <option value="date-desc">Newest First</option>
+                                <option value="date-asc">Oldest First</option>
+                                <option value="queue-asc">Queue Number (A-Z)</option>
+                                <option value="queue-desc">Queue Number (Z-A)</option>
+                                <option value="name-asc">Name (A-Z)</option>
+                                <option value="name-desc">Name (Z-A)</option>
+                            </select>
+                            <div class="input-group" style="width: 250px;">
+                                <input id="log-search" type="search" class="form-control form-control-sm" placeholder="Search history...">
+                                <button id="search-clear" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -93,15 +112,49 @@
             const clearBtn = document.getElementById('clear-log-btn');
             const searchInput = document.getElementById('log-search');
             const clearSearchBtn = document.getElementById('search-clear');
+            const sortBySelect = document.getElementById('sort-by');
+            const exportFormatSelect = document.getElementById('export-format');
+
+            function sortRecords(rows, sortBy) {
+                const sorted = [...rows];
+                switch(sortBy) {
+                    case 'date-desc':
+                        sorted.sort((a, b) => new Date(b.completedAt || b.checkInTime) - new Date(a.completedAt || a.checkInTime));
+                        break;
+                    case 'date-asc':
+                        sorted.sort((a, b) => new Date(a.completedAt || a.checkInTime) - new Date(b.completedAt || b.checkInTime));
+                        break;
+                    case 'queue-asc':
+                        sorted.sort((a, b) => (a.queueNumber || '').localeCompare(b.queueNumber || ''));
+                        break;
+                    case 'queue-desc':
+                        sorted.sort((a, b) => (b.queueNumber || '').localeCompare(a.queueNumber || ''));
+                        break;
+                    case 'name-asc':
+                        sorted.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+                        break;
+                    case 'name-desc':
+                        sorted.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+                        break;
+                }
+                return sorted;
+            }
 
             function render() {
-                const rows = serviceLog.getHistory();
+                let rows = serviceLog.getHistory();
                 const q = searchInput.value.trim().toLowerCase();
+                const sortBy = sortBySelect.value;
+                
                 tbody.innerHTML = '';
                 if (!rows || rows.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="4" class="text-center p-3">No completed services yet.</td></tr>';
                     return;
                 }
+
+                // Apply sorting
+                rows = sortRecords(rows, sortBy);
+
+                // Apply filtering
                 rows.forEach(r => {
                     const text = `${r.queueNumber} ${r.name} ${r.carPlate}`.toLowerCase();
                     if (q && !text.includes(q)) return;
@@ -119,7 +172,11 @@
                 }
             }
 
-            exportBtn.addEventListener('click', () => serviceLog.exportHistory());
+            exportBtn.addEventListener('click', () => {
+                const format = exportFormatSelect.value;
+                serviceLog.exportHistory(format);
+            });
+            
             clearBtn.addEventListener('click', () => {
                 if (confirm('Clear service log? This cannot be undone.')) {
                     serviceLog.clearHistory();
@@ -128,6 +185,7 @@
             });
 
             searchInput.addEventListener('input', render);
+            sortBySelect.addEventListener('change', render);
             clearSearchBtn.addEventListener('click', () => { searchInput.value = ''; render(); });
 
             window.addEventListener('storage', render);
