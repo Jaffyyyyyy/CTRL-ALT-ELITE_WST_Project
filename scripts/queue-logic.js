@@ -168,9 +168,15 @@ const queueService = (() => {
     
     const removeCustomer = (customerId) => {
         const state = getState();
-        state.customers = state.customers.filter(c => c.id !== customerId);
-        if (state.nowServing === customerId) {
-            state.nowServing = null;
+        const customer = state.customers.find(c => c.id === customerId);
+        if (customer) {
+            customer.status = 'Cancelled';
+            customer.cancelledAt = new Date().toISOString();
+            state.customers = state.customers.filter(c => c.id !== customerId);
+            state.history.unshift(customer);
+            if (state.nowServing === customerId) {
+                state.nowServing = null;
+            }
         }
         setState(state);
     };

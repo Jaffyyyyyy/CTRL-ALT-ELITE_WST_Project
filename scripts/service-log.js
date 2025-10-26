@@ -59,14 +59,17 @@ const serviceLog = (() => {
     };
 
     const exportAsXLSX = (hist, timestamp) => {
-        let csv = 'Queue Number,Name,Car Plate,Completed At\n';
+        let csv = 'Queue Number,Name,Car Plate,Status,Finished At\n';
         
         hist.forEach(r => {
+            const status = r.status || 'Completed';
+            const finishedTime = r.cancelledAt || r.completedAt || r.checkInTime;
             const row = [
                 escapeCSV(r.queueNumber),
                 escapeCSV(r.name),
                 escapeCSV(r.carPlate || 'N/A'),
-                escapeCSV(new Date(r.completedAt || r.checkInTime).toLocaleString())
+                escapeCSV(status),
+                escapeCSV(new Date(finishedTime).toLocaleString())
             ];
             csv += row.join(',') + '\n';
         });
@@ -93,12 +96,15 @@ const serviceLog = (() => {
         content += '='.repeat(60) + '\n\n';
 
         hist.forEach((r, idx) => {
+            const status = r.status || 'Completed';
+            const finishedTime = r.cancelledAt || r.completedAt || r.checkInTime;
             content += `Record #${idx + 1}\n`;
             content += '-'.repeat(40) + '\n';
             content += `Queue Number: ${r.queueNumber}\n`;
             content += `Name: ${r.name}\n`;
             content += `Car Plate: ${r.carPlate || 'N/A'}\n`;
-            content += `Completed At: ${new Date(r.completedAt || r.checkInTime).toLocaleString()}\n`;
+            content += `Status: ${status}\n`;
+            content += `Finished At: ${new Date(finishedTime).toLocaleString()}\n`;
             content += '\n';
         });
 
@@ -116,12 +122,15 @@ const serviceLog = (() => {
         content += '='.repeat(60) + '\n\n';
 
         hist.forEach((r, idx) => {
+            const status = r.status || 'Completed';
+            const finishedTime = r.cancelledAt || r.completedAt || r.checkInTime;
             content += `Record #${idx + 1}\n`;
             content += '-'.repeat(40) + '\n';
             content += `Queue Number: ${r.queueNumber}\n`;
             content += `Name: ${r.name}\n`;
             content += `Car Plate: ${r.carPlate || 'N/A'}\n`;
-            content += `Completed At: ${new Date(r.completedAt || r.checkInTime).toLocaleString()}\n`;
+            content += `Status: ${status}\n`;
+            content += `Finished At: ${new Date(finishedTime).toLocaleString()}\n`;
             content += '\n';
         });
 

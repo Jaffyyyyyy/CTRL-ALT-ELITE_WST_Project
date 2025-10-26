@@ -40,8 +40,8 @@
                         <h3 class="h5">Manage Bookings</h3>
                         <p class="small text-muted">View and export completed service logs, search bookings, and manage entries.</p>
                         <div class="mb-3">
-                            <label for="export-format" class="form-label small fw-bold">Please choose export format</label>
                             <select id="export-format" class="form-select form-select-sm">
+                                <option value="" selected disabled>Please choose export format</option>
                                 <option value="json">JSON</option>
                                 <option value="xlsx">CSV (Excel Compatible)</option>
                                 <option value="docx">Word Document (RTF)</option>
@@ -76,13 +76,14 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-sm mb-0">
-                                <thead class="table-light">
+                            <table class="table table-hover table-striped align-middle mb-0">
+                                <thead style="background-color: var(--otopila-primary-dark); color: white;">
                                     <tr>
-                                        <th>Queue</th>
-                                        <th>Name</th>
-                                        <th>Car</th>
-                                        <th>Finished At</th>
+                                        <th class="px-3 py-3">Queue #</th>
+                                        <th class="px-3 py-3">Customer Name</th>
+                                        <th class="px-3 py-3">Car Plate</th>
+                                        <th class="px-3 py-3 text-center">Status</th>
+                                        <th class="px-3 py-3">Date & Time</th>
                                     </tr>
                                 </thead>
                                 <tbody id="service-log-body">
@@ -147,33 +148,43 @@
                 
                 tbody.innerHTML = '';
                 if (!rows || rows.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center p-3">No completed services yet.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center p-4 text-muted">No completed services yet.</td></tr>';
                     return;
                 }
 
-                // Apply sorting
                 rows = sortRecords(rows, sortBy);
 
-                // Apply filtering
                 rows.forEach(r => {
                     const text = `${r.queueNumber} ${r.name} ${r.carPlate}`.toLowerCase();
                     if (q && !text.includes(q)) return;
+                    
+                    const status = r.status || 'Completed';
+                    const statusBadge = status === 'Cancelled' 
+                        ? '<span class="badge bg-danger">Cancelled</span>' 
+                        : '<span class="badge bg-success">Completed</span>';
+                    const finishedTime = r.cancelledAt || r.completedAt || r.checkInTime;
+                    
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td>${r.queueNumber}</td>
-                        <td>${r.name}</td>
-                        <td>${r.carPlate || 'N/A'}</td>
-                        <td>${new Date(r.completedAt || r.checkInTime).toLocaleString()}</td>
+                        <td class="px-3 py-3 fw-bold">${r.queueNumber}</td>
+                        <td class="px-3 py-3">${r.name}</td>
+                        <td class="px-3 py-3"><span class="badge bg-secondary">${r.carPlate || 'N/A'}</span></td>
+                        <td class="px-3 py-3 text-center">${statusBadge}</td>
+                        <td class="px-3 py-3 text-muted"><small>${new Date(finishedTime).toLocaleString()}</small></td>
                     `;
                     tbody.appendChild(tr);
                 });
                 if (!tbody.firstChild) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center p-3">No results.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center p-4 text-muted">No results found.</td></tr>';
                 }
             }
 
             exportBtn.addEventListener('click', () => {
                 const format = exportFormatSelect.value;
+                if (!format) {
+                    alert('Please select an export format first.');
+                    return;
+                }
                 serviceLog.exportHistory(format);
             });
             

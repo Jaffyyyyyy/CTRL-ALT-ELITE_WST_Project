@@ -211,25 +211,64 @@
    - Should redirect to `manage-booking.html`
 
 2. **View Service History**
-   - Completed customers should appear in table
-   - Shows: Queue Number, Name, Car, Finished At
+   - All completed and cancelled services appear in a styled table
+   - Table shows: Queue #, Customer Name, Car Plate, Status, Date & Time
+   - **Status badges:**
+     - Green badge for "Completed" services
+     - Red badge for "Cancelled" services
+   - Table features hover effects and striped rows for better readability
+   - Car plates displayed as badges for visual clarity
 
-3. **Search Service History**
+3. **Sort Service Records**
+   - Use the sorting dropdown to organize records:
+     - **Newest First** (default) - Most recent services at top
+     - **Oldest First** - Oldest services at top
+     - **Queue Number (A-Z)** - Alphabetical by queue number
+     - **Queue Number (Z-A)** - Reverse alphabetical
+     - **Name (A-Z)** - Alphabetical by customer name
+     - **Name (Z-A)** - Reverse alphabetical
+   - Sorting updates instantly when selection changes
+
+4. **Search Service History**
    - Type customer name in search box
-   - Results should filter in real-time
+   - Results filter in real-time as you type
    - Try searching by queue number (e.g., "A-101")
-   - Click "Clear" to reset search
+   - Search also filters by car plate
+   - Click "Clear" button to reset search
+   - Search works together with sorting
 
-4. **Export Service Log**
+5. **Export Service Log in Multiple Formats**
+   - Select your preferred export format from dropdown:
+     - **JSON** - Structured data file with all record details
+     - **CSV (Excel Compatible)** - Opens directly in Microsoft Excel
+     - **Word Document (RTF)** - Formatted report for Microsoft Word
+     - **Text File (TXT)** - Plain text report
    - Click "Export Service Log" button
-   - JSON file should download: `otopila-service-history.json`
-   - Open file → Should contain all completed services
+   - File downloads automatically with timestamp in filename
+   - **All export formats include:**
+     - Queue Number
+     - Customer Name
+     - Car Plate
+     - Status (Completed or Cancelled)
+     - Finished At (date and time)
+   - CSV format includes proper headers and UTF-8 encoding
+   - Word/RTF format includes formatted report header
+   - Text format includes structured report with record count
 
-5. **Clear Service Log**
+6. **Track Cancelled Services**
+   - When advisor cancels a customer from queue:
+     - Customer is moved to service log with "Cancelled" status
+     - Cancelled services appear with red badge
+     - Cancellation timestamp is recorded
+   - Both completed and cancelled services are preserved in history
+   - Export includes both types of records with their respective labels
+
+7. **Clear Service Log**
    - Click "Clear Service Log" button
-   - Confirmation dialog appears
-   - Click "OK" → History cleared
+   - Confirmation dialog appears: "Clear service log? This cannot be undone."
+   - Click "OK" → All history cleared (both completed and cancelled)
    - Table shows "No completed services yet."
+   - This action cannot be reversed
 
 ### Test 9: Advisor Logout
 
@@ -299,7 +338,82 @@
    - Click 5 stars → Submit → Check quote (should be very positive)
 5. **Verify reviews appear** in carousel on `queue.html`
 
-### Test 14: Navigation & Responsive Design
+### Test 14: Export Formats & Data Integrity
+
+1. **Test JSON Export:**
+   - Go to Manage Bookings page
+   - Select "JSON" from export format dropdown
+   - Click "Export Service Log"
+   - File downloads as: `otopila-service-history-YYYY-MM-DD-HHMMSS.json`
+   - Open in text editor → Should show formatted JSON array
+   - Verify all fields are present: queueNumber, name, carPlate, status, timestamps
+
+2. **Test CSV Export (Excel Compatible):**
+   - Select "CSV (Excel Compatible)" from dropdown
+   - Click "Export Service Log"
+   - File downloads as: `otopila-service-history-YYYY-MM-DD-HHMMSS.csv`
+   - Open in Microsoft Excel or Google Sheets
+   - Should have proper column headers
+   - Verify UTF-8 encoding (special characters display correctly)
+   - Check comma-separated values are properly escaped
+
+3. **Test Word Document Export:**
+   - Select "Word Document (RTF)" from dropdown
+   - Click "Export Service Log"
+   - File downloads as: `otopila-service-history-YYYY-MM-DD-HHMMSS.doc`
+   - Open in Microsoft Word or compatible program
+   - Should show formatted report with:
+     - Title: "OTOPILA SERVICE HISTORY REPORT"
+     - Generation timestamp
+     - Total record count
+     - Each record with all fields properly formatted
+
+4. **Test Text File Export:**
+   - Select "Text File (TXT)" from dropdown
+   - Click "Export Service Log"
+   - File downloads as: `otopila-service-history-YYYY-MM-DD-HHMMSS.txt`
+   - Open in any text editor (Notepad, VS Code, etc.)
+   - Should display structured plain text report
+   - Easy to read format with separators
+
+5. **Test Export with Different Statuses:**
+   - Complete some services (green "Completed" badge)
+   - Cancel some services (red "Cancelled" badge)
+   - Export in any format
+   - Verify both completed and cancelled records are included
+   - Status field should clearly indicate "Completed" or "Cancelled"
+
+6. **Test Empty Export:**
+   - Clear service log
+   - Try to export
+   - Should show alert: "No service history to export."
+   - No file should download
+
+### Test 15: Sorting and Filtering Features
+
+1. **Test All Sort Options:**
+   - Go to Manage Bookings page
+   - Ensure you have multiple records with different dates/names
+   - Test "Newest First" → Most recent at top
+   - Test "Oldest First" → Oldest at top
+   - Test "Queue Number (A-Z)" → A-101, A-102, A-103...
+   - Test "Queue Number (Z-A)" → A-105, A-104, A-103...
+   - Test "Name (A-Z)" → Alice, Bob, Charlie...
+   - Test "Name (Z-A)" → Zelda, Yara, Xavier...
+
+2. **Test Search Filter:**
+   - Type partial name → Should show matching records only
+   - Type queue number → Should find specific record
+   - Type car plate → Should find matching vehicles
+   - Clear search → All records return
+
+3. **Test Combined Sort and Search:**
+   - Apply a sort order (e.g., "Name A-Z")
+   - Then type in search box
+   - Filtered results should maintain sort order
+   - Change sort while search is active → Should re-sort filtered results
+
+### Test 16: Navigation & Responsive Design
 
 1. **Test All Navigation Links:**
    - Home → `index.html`
@@ -318,7 +432,7 @@
    - Click hamburger menu
    - All links should be accessible
 
-### Test 15: Browser Compatibility
+### Test 17: Browser Compatibility
 
 Test the application in multiple browsers:
 - **Chrome** (latest version)
@@ -418,12 +532,17 @@ Use this checklist to ensure complete testing:
 - [ ] Call next customer
 - [ ] Update customer status
 - [ ] Complete customer service
-- [ ] Cancel customer
+- [ ] Cancel customer (moved to history with "Cancelled" status)
 - [ ] Load demo data
 - [ ] Clear queue
-- [ ] View service history
+- [ ] View service history (completed and cancelled)
 - [ ] Search service history
-- [ ] Export service log
+- [ ] Sort service records (6 different sort options)
+- [ ] Export service log as JSON
+- [ ] Export service log as CSV (Excel)
+- [ ] Export service log as Word/RTF
+- [ ] Export service log as TXT
+- [ ] Verify status badges (green for completed, red for cancelled)
 - [ ] Clear service history
 - [ ] Logout
 
@@ -446,6 +565,21 @@ Use this checklist to ensure complete testing:
 - Data persists across page refreshes
 - Data is browser-specific (not shared between browsers)
 - Clear localStorage to reset application state
+
+### Service Log Features
+- **Status Tracking:** Both completed and cancelled services are recorded
+- **Visual Indicators:** 
+  - Completed services show green "Completed" badge
+  - Cancelled services show red "Cancelled" badge
+  - Queue numbers are highlighted in blue
+  - Car plates displayed as gray badges
+- **Enhanced Table Design:**
+  - Dark header with white text for better contrast
+  - Hover effects on rows for better interactivity
+  - Striped rows for easier reading
+  - Responsive design adapts to all screen sizes
+- **Export Timestamps:** All exported files include generation timestamp in filename
+- **Multi-Format Support:** Choose from 4 export formats based on your needs
 
 ### Demo Data Structure
 The demo data includes 5 customers with different statuses:
