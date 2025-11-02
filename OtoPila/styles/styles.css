@@ -391,6 +391,8 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     align-items: center;
     justify-content: center;
     z-index: 10;
+    left: 20px;
+    right: 20px;
 }
 
 .carousel-control:hover {
@@ -398,9 +400,26 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 }
 
 .carousel-control.prev {
-    left: 15px;
+    left: 20px;
 }
 
 .carousel-control.next {
-    right: 15px;
+    right: 20px;
+}
+
+.review-carousel #reviews-container {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.review-carousel #reviews-container.review-fade-out {
+    opacity: 0;
+}
+
+.review-carousel #reviews-container.review-fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
