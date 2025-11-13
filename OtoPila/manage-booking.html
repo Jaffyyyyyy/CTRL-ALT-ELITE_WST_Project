@@ -7,25 +7,47 @@
     <script src="scripts/auth-guard.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/slideshow.css">
 </head>
 <body>
-    <nav data-nav-path="_advisor-nav.html"></nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="advisor-dashboard.html"><img src="images/OtoPilaLogo.png" alt="OtoPila Logo" style="height: 80px;"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="advisor-dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="manage-booking.html">Manage Bookings</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a id="logout-btn" class="nav-link" href="#" onclick="handleLogout(event)">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main class="container my-4">
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="card shadow-sm border-0">
-                    <div id="slideshow-container" class="card-img-top">
-    <img src="images/ivan-kazlouskij-NkBFPN9TSnQ-unsplash.jpg" alt="Slideshow Image" class="slideshow-image">
-    <img src="images/maxx-sas-Wi0UCLsvShA-unsplash.png" alt="Slideshow Image" class="slideshow-image">
-    <img src="images/nik-phP5Qa0CauQ-unsplash.jpg" alt="Slideshow Image" class="slideshow-image">
-    <img src="images/nik-Qnd5iTrimvk-unsplash.jpg" alt="Slideshow Image" class="slideshow-image">
-    <img src="images/tim-mossholder-V37iTrYZz2E-unsplash.jpg" alt="Slideshow Image" class="slideshow-image">
-</div>
+                    <img src="images/c-joyful-heFTscwGDCA-unsplash-home-checklist-car-red-600px.png" class="card-img-top" alt="Checklist">
                     <div class="card-body">
                         <h3 class="h5">Manage Bookings</h3>
                         <p class="small text-muted">View and export completed service logs, search bookings, and manage entries.</p>
+                        <div class="mb-3">
+                            <select id="export-format" class="form-select form-select-sm">
+                                <option value="" selected disabled>Please choose export format</option>
+                                <option value="json">JSON</option>
+                                <option value="xlsx">CSV (Excel Compatible)</option>
+                                <option value="docx">Word Document (RTF)</option>
+                                <option value="txt">Text File (TXT)</option>
+                            </select>
+                        </div>
                         <div class="d-grid">
                             <button id="export-log-btn" class="btn btn-outline-primary btn-sm mb-2">Export Service Log</button>
                             <button id="clear-log-btn" class="btn btn-outline-danger btn-sm">Clear Service Log</button>
@@ -37,20 +59,31 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-header d-flex justify-content-between align-items-center p-3" style="background-color: var(--otopila-accent-light);">
                         <h3 class="h6 mb-0 fw-bold" style="color: var(--otopila-primary-dark);">Service Log</h3>
-                        <div class="input-group w-50">
-                            <input id="log-search" type="search" class="form-control form-control-sm" placeholder="Search history...">
-                            <button id="search-clear" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                        <div class="d-flex gap-2 align-items-center">
+                            <select id="sort-by" class="form-select form-select-sm" style="width: auto;">
+                                <option value="date-desc">Newest First</option>
+                                <option value="date-asc">Oldest First</option>
+                                <option value="queue-asc">Queue Number (A-Z)</option>
+                                <option value="queue-desc">Queue Number (Z-A)</option>
+                                <option value="name-asc">Name (A-Z)</option>
+                                <option value="name-desc">Name (Z-A)</option>
+                            </select>
+                            <div class="input-group" style="width: 250px;">
+                                <input id="log-search" type="search" class="form-control form-control-sm" placeholder="Search history...">
+                                <button id="search-clear" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-sm mb-0">
-                                <thead class="table-light">
+                            <table class="table table-hover table-striped align-middle mb-0">
+                                <thead style="background-color: var(--otopila-primary-dark); color: white;">
                                     <tr>
-                                        <th>Queue</th>
-                                        <th>Name</th>
-                                        <th>Car</th>
-                                        <th>Finished At</th>
+                                        <th class="px-3 py-3">Queue #</th>
+                                        <th class="px-3 py-3">Customer Name</th>
+                                        <th class="px-3 py-3">Car Plate</th>
+                                        <th class="px-3 py-3 text-center">Status</th>
+                                        <th class="px-3 py-3">Date & Time</th>
                                     </tr>
                                 </thead>
                                 <tbody id="service-log-body">
@@ -73,7 +106,6 @@
     <script src="scripts/auto-load-demo.js"></script>
     <script src="scripts/service-log.js"></script>
     <script src="scripts/ui-toasts.js"></script>
-    <script src="scripts/slideshow.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const tbody = document.getElementById('service-log-body');
@@ -81,33 +113,81 @@
             const clearBtn = document.getElementById('clear-log-btn');
             const searchInput = document.getElementById('log-search');
             const clearSearchBtn = document.getElementById('search-clear');
+            const sortBySelect = document.getElementById('sort-by');
+            const exportFormatSelect = document.getElementById('export-format');
+
+            function sortRecords(rows, sortBy) {
+                const sorted = [...rows];
+                switch(sortBy) {
+                    case 'date-desc':
+                        sorted.sort((a, b) => new Date(b.completedAt || b.checkInTime) - new Date(a.completedAt || a.checkInTime));
+                        break;
+                    case 'date-asc':
+                        sorted.sort((a, b) => new Date(a.completedAt || a.checkInTime) - new Date(b.completedAt || b.checkInTime));
+                        break;
+                    case 'queue-asc':
+                        sorted.sort((a, b) => (a.queueNumber || '').localeCompare(b.queueNumber || ''));
+                        break;
+                    case 'queue-desc':
+                        sorted.sort((a, b) => (b.queueNumber || '').localeCompare(a.queueNumber || ''));
+                        break;
+                    case 'name-asc':
+                        sorted.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+                        break;
+                    case 'name-desc':
+                        sorted.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+                        break;
+                }
+                return sorted;
+            }
 
             function render() {
-                const rows = serviceLog.getHistory();
+                let rows = serviceLog.getHistory();
                 const q = searchInput.value.trim().toLowerCase();
+                const sortBy = sortBySelect.value;
+                
                 tbody.innerHTML = '';
                 if (!rows || rows.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center p-3">No completed services yet.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center p-4 text-muted">No completed services yet.</td></tr>';
                     return;
                 }
+
+                rows = sortRecords(rows, sortBy);
+
                 rows.forEach(r => {
                     const text = `${r.queueNumber} ${r.name} ${r.carPlate}`.toLowerCase();
                     if (q && !text.includes(q)) return;
+                    
+                    const status = r.status || 'Completed';
+                    const statusBadge = status === 'Cancelled' 
+                        ? '<span class="badge bg-danger">Cancelled</span>' 
+                        : '<span class="badge bg-success">Completed</span>';
+                    const finishedTime = r.cancelledAt || r.completedAt || r.checkInTime;
+                    
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td>${r.queueNumber}</td>
-                        <td>${r.name}</td>
-                        <td>${r.carPlate || 'N/A'}</td>
-                        <td>${new Date(r.completedAt || r.checkInTime).toLocaleString()}</td>
+                        <td class="px-3 py-3 fw-bold">${r.queueNumber}</td>
+                        <td class="px-3 py-3">${r.name}</td>
+                        <td class="px-3 py-3"><span class="badge bg-secondary">${r.carPlate || 'N/A'}</span></td>
+                        <td class="px-3 py-3 text-center">${statusBadge}</td>
+                        <td class="px-3 py-3 text-muted"><small>${new Date(finishedTime).toLocaleString()}</small></td>
                     `;
                     tbody.appendChild(tr);
                 });
                 if (!tbody.firstChild) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center p-3">No results.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center p-4 text-muted">No results found.</td></tr>';
                 }
             }
 
-            exportBtn.addEventListener('click', () => serviceLog.exportHistory());
+            exportBtn.addEventListener('click', () => {
+                const format = exportFormatSelect.value;
+                if (!format) {
+                    alert('Please select an export format first.');
+                    return;
+                }
+                serviceLog.exportHistory(format);
+            });
+            
             clearBtn.addEventListener('click', () => {
                 if (confirm('Clear service log? This cannot be undone.')) {
                     serviceLog.clearHistory();
@@ -116,12 +196,13 @@
             });
 
             searchInput.addEventListener('input', render);
+            sortBySelect.addEventListener('change', render);
             clearSearchBtn.addEventListener('click', () => { searchInput.value = ''; render(); });
 
             window.addEventListener('storage', render);
             render();
         });
     </script>
-    <script src="scripts/nav-loader.js"></script>
+    <script src="scripts/logout.js"></script>
 </body>
 </html>
