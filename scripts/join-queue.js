@@ -70,10 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
-        if (carPlateInput && carPlateInput.value && !/^[A-Z]{1,3}-[0-9]{1,4}$/.test(carPlateInput.value)) {
+        if (!emailInput.value.trim()) {
+            emailInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            emailInput.classList.remove('is-invalid');
+        }
+
+        if (!carPlateInput.value.trim()) {
             carPlateInput.classList.add('is-invalid');
             isValid = false;
-        } else if (carPlateInput) {
+        } else if (!/^[A-Z]{1,3}-[0-9]{1,4}$/.test(carPlateInput.value)) {
+            carPlateInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
             carPlateInput.classList.remove('is-invalid');
         }
 
