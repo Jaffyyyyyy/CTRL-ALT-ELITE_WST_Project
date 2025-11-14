@@ -41,6 +41,7 @@ const queueService = (() => {
                 name: cust.name,
                 email: cust.email,
                 carPlate: cust.carPlate,
+                paymentMethod: cust.paymentMethod,
                 status: cust.status,
                 checkInTime: new Date().toISOString()
             };
@@ -79,6 +80,7 @@ const queueService = (() => {
                 name: cust.name,
                 email: cust.email,
                 carPlate: cust.carPlate,
+                paymentMethod: cust.paymentMethod,
                 status: cust.status,
                 checkInTime: new Date().toISOString()
             };
@@ -110,6 +112,7 @@ const queueService = (() => {
             name: customerData.name,
             email: customerData.email,
             carPlate: customerData.carPlate,
+            paymentMethod: customerData.paymentMethod,
             status: 'Waiting', 
             checkInTime: new Date().toISOString()
         };

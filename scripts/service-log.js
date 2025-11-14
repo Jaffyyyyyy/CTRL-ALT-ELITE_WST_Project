@@ -59,7 +59,7 @@ const serviceLog = (() => {
     };
 
     const exportAsXLSX = (hist, timestamp) => {
-        let csv = 'Queue Number,Name,Car Plate,Status,Finished At\n';
+        let csv = 'Queue Number,Name,Car Plate,Payment Method,Status,Finished At\n';
         
         hist.forEach(r => {
             const status = r.status || 'Completed';
@@ -68,6 +68,7 @@ const serviceLog = (() => {
                 escapeCSV(r.queueNumber),
                 escapeCSV(r.name),
                 escapeCSV(r.carPlate || 'N/A'),
+                escapeCSV(r.paymentMethod || 'N/A'),
                 escapeCSV(status),
                 escapeCSV(new Date(finishedTime).toLocaleString())
             ];
@@ -103,6 +104,7 @@ const serviceLog = (() => {
             content += `Queue Number: ${r.queueNumber}\n`;
             content += `Name: ${r.name}\n`;
             content += `Car Plate: ${r.carPlate || 'N/A'}\n`;
+            content += `Payment Method: ${r.paymentMethod || 'N/A'}\n`;
             content += `Status: ${status}\n`;
             content += `Finished At: ${new Date(finishedTime).toLocaleString()}\n`;
             content += '\n';
@@ -129,6 +131,7 @@ const serviceLog = (() => {
             content += `Queue Number: ${r.queueNumber}\n`;
             content += `Name: ${r.name}\n`;
             content += `Car Plate: ${r.carPlate || 'N/A'}\n`;
+            content += `Payment Method: ${r.paymentMethod || 'N/A'}\n`;
             content += `Status: ${status}\n`;
             content += `Finished At: ${new Date(finishedTime).toLocaleString()}\n`;
             content += '\n';

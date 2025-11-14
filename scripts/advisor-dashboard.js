@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         queueTableBodyEl.innerHTML = '';
         if (customers.length === 0) {
-            queueTableBodyEl.innerHTML = '<tr><td colspan="5" class="text-center p-4">The queue is empty.</td></tr>';
+            queueTableBodyEl.innerHTML = '<tr><td colspan="6" class="text-center p-4">The queue is empty.</td></tr>';
         } else {
             customers.forEach(customer => {
                 const row = document.createElement('tr');
@@ -63,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td class="p-3 align-middle">${new Date(customer.checkInTime).toLocaleTimeString()}</td>
                     <td class="p-3 align-middle text-center">${statusBadge}</td>
+                    <td class="p-3 align-middle text-center">
+                        <span class="badge bg-info">${customer.paymentMethod || 'N/A'}</span>
+                    </td>
                     <td class="p-3 align-middle text-center">
                         <select class="form-select form-select-sm status-select" data-id="${customer.id}">
                             ${statusOptions}

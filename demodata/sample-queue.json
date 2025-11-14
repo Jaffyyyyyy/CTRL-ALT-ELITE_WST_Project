@@ -4,31 +4,36 @@
       "name": "John Doe",
       "email": "john.d@example.com",
       "carPlate": "ABC-1237",
-      "status": "Completed"
+      "status": "Completed",
+      "paymentMethod": "Cash"
     },
     {
       "name": "Jane Smith",
       "email": "jane.s@example.com",
       "carPlate": "DEF-4569",
-      "status": "In Service"
+      "status": "In Service",
+      "paymentMethod": "E-Wallet"
     },
     {
       "name": "Carlos Reyes",
       "email": "carlos.r@example.com",
       "carPlate": "GHI-7890",
-      "status": "Waiting"
+      "status": "Waiting",
+      "paymentMethod": "Credit Card"
     },
     {
       "name": "Maria Garcia",
       "email": "maria.g@example.com",
       "carPlate": "JKL-0125",
-      "status": "Waiting"
+      "status": "Waiting",
+      "paymentMethod": "Cash"
     },
     {
       "name": "Siti Aminah",
       "email": "siti.a@example.com",
       "carPlate": "MNO-3456",
-      "status": "Waiting"
+      "status": "Waiting",
+      "paymentMethod": "E-Wallet"
     }
   ]
 }

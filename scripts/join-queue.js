@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const validateCarPlate = (val) => {
-        if (!val) return false;
+        if (!val) return true;
         return /^[A-Z]{3}-[0-9]{4}$/.test(val);
     };
 
@@ -57,11 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
         carPlateInput.addEventListener('blur', applyFormat);
     }
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
+    const emailInput = document.getElementById('email');
+    const selectPaymentBtn = document.getElementById('select-payment-btn');
+    const paymentMethodInput = document.getElementById('paymentMethod');
+    const paymentMethodContainer = document.getElementById('payment-method-container');
+    let selectedPaymentMethod = null;
 
-        const emailInput = document.getElementById('email');
-        
+    selectPaymentBtn.addEventListener('click', () => {
         formatAndValidateName();
 
         let isValid = true;
@@ -77,10 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             emailInput.classList.remove('is-invalid');
         }
 
-        if (!carPlateInput.value.trim()) {
-            carPlateInput.classList.add('is-invalid');
-            isValid = false;
-        } else if (!/^[A-Z]{3}-[0-9]{4}$/.test(carPlateInput.value)) {
+        if (carPlateInput.value.trim() && !/^[A-Z]{3}-[0-9]{4}$/.test(carPlateInput.value)) {
             carPlateInput.classList.add('is-invalid');
             isValid = false;
         } else {
@@ -91,14 +90,44 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+        paymentModal.show();
+    });
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
         
+        if (!selectedPaymentMethod) {
+            alert('Please select a payment method first.');
+            return;
+        }
+
+        processQueueJoin(selectedPaymentMethod);
+    });
+
+    document.querySelectorAll('.payment-option').forEach(button => {
+        button.addEventListener('click', function() {
+            selectedPaymentMethod = this.getAttribute('data-payment');
+            const paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+            paymentModal.hide();
+            
+            paymentMethodInput.value = selectedPaymentMethod;
+            paymentMethodContainer.style.display = 'block';
+            
+            selectPaymentBtn.style.display = 'none';
+            submitButton.style.display = 'block';
+        });
+    });
+
+    function processQueueJoin(paymentMethod) {
         submitButton.style.display = 'none';
         animationContainer.style.display = 'block';
 
         const customerData = {
             name: nameInput.value.trim(),
             email: emailInput.value.trim(),
-            carPlate: carPlateInput.value.trim()
+            carPlate: carPlateInput.value.trim() || 'N/A',
+            paymentMethod: paymentMethod || selectedPaymentMethod
         };
 
         const prevState = queueService.getState();
@@ -128,6 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             window.location.href = `status.html?new=true`;
-        }, 4000);
-    });
+        }, 2500);
+    }
 });

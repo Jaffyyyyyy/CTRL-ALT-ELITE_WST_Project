@@ -421,3 +421,97 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* Payment Method Modal Styles */
+.payment-option {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+}
+
+.payment-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.payment-option:active {
+    transform: translateY(-1px);
+}
+
+/* Cash Payment - Green */
+.payment-cash {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border-color: #28a745;
+}
+
+.payment-cash:hover {
+    background: linear-gradient(135deg, #218838 0%, #1aa179 100%);
+    border-color: #1e7e34;
+    color: white;
+}
+
+/* E-Wallet Payment - Blue */
+.payment-ewallet {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border-color: #007bff;
+}
+
+.payment-ewallet:hover {
+    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
+    border-color: #0062cc;
+    color: white;
+}
+
+/* Credit Card Payment - Purple */
+.payment-credit {
+    background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%);
+    color: white;
+    border-color: #6f42c1;
+}
+
+.payment-credit:hover {
+    background: linear-gradient(135deg, #5e37a6 0%, #4c2a8a 100%);
+    border-color: #59339d;
+    color: white;
+}
+
+/* Payment Modal Enhancements */
+#paymentModal .modal-content {
+    border-radius: 16px;
+}
+
+#paymentModal .modal-header {
+    background-color: var(--otopila-primary-dark);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 16px 16px 0 0;
+}
+
+#paymentModal .modal-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#paymentModal .modal-title svg {
+    color: var(--otopila-caramel);
+}
+
+#paymentModal .modal-body {
+    padding: 2rem;
+    background-color: #f8f9fa;
+}
+
+.payment-option .text-white-50 {
+    opacity: 0.9;
+}
+
+.payment-option svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
