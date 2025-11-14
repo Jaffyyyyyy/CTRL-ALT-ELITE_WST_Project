@@ -391,8 +391,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     align-items: center;
     justify-content: center;
     z-index: 10;
-    left: 20px;
-    right: 20px;
 }
 
 .carousel-control:hover {

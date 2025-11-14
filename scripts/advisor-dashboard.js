@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inServiceCountEl = document.getElementById('dashboard-in-service-count');
     const completedCountEl = document.getElementById('dashboard-completed-count');
     const queueTableBodyEl = document.getElementById('queue-table-body');
-    const callNextBtn = document.getElementById('call-next-btn');
     const clearQueueBtn = document.getElementById('clear-queue-btn');
     const loadDemoDataBtn = document.getElementById('load-demo-data-btn');
 
@@ -45,12 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
             customers.forEach(customer => {
                 const row = document.createElement('tr');
                 const statusBadge = getStatusBadge(customer.status);
-                const statusOptions = customer.status === 'In Service'
-                    ? `<option value="In Service" selected>In Service</option>
-                       <option value="Completed">Completed</option>`
-                    : `<option value="Waiting" ${customer.status === 'Waiting' ? 'selected' : ''}>Waiting</option>
-                       <option value="In Service" ${customer.status === 'In Service' ? 'selected' : ''}>In Service</option>
-                       <option value="Completed" ${customer.status === 'Completed' ? 'selected' : ''}>Completed</option>`;
+                let statusOptions = '';
+                if (customer.status === 'Waiting') {
+                    statusOptions = `<option value="Waiting" selected>Waiting</option>
+                       <option value="In Service">In Service</option>`;
+                } else if (customer.status === 'In Service') {
+                    statusOptions = `<option value="In Service" selected>In Service</option>
+                       <option value="Completed">Completed</option>`;
+                } else {
+                    statusOptions = `<option value="${customer.status}" selected>${customer.status}</option>`;
+                }
 
                 row.innerHTML = `
                     <td class="p-3">
@@ -66,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </select>
                     </td>
                     <td class="p-3 align-middle text-center">
-                        <button class="btn btn-sm btn-outline-danger remove-btn" data-id="${customer.id}">Cancel</button>
+                        ${customer.status === 'Waiting' ? `<button class="btn btn-sm btn-outline-danger remove-btn" data-id="${customer.id}">Cancel</button>` : ''}
                     </td>
                 `;
                 queueTableBodyEl.appendChild(row);
@@ -138,29 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 queueService.updateCustomerStatus(customerId, newStatus);
             }
-        }
-    });
-
-    callNextBtn.addEventListener('click', () => {
-        const state = queueService.getState();
-        const nowServingCustomer = state.customers.find(c => c.id === state.nowServing);
-
-        if (nowServingCustomer) {
-            const button = queueTableBodyEl.querySelector(`button[data-id="${nowServingCustomer.id}"]`);
-            if (button) {
-                const row = button.closest('tr');
-                row.classList.add('queue-item-exiting');
-                setTimeout(() => {
-                    queueService.callNextCustomer();
-                    renderDashboard();
-                }, 500);
-            } else {
-                queueService.callNextCustomer();
-                renderDashboard();
-            }
-        } else {
-            queueService.callNextCustomer();
-            renderDashboard();
         }
     });
 

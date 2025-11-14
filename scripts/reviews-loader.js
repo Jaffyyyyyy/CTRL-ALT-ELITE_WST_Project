@@ -54,7 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(sampleReviews => {
                     reviews = [...sampleReviews, ...localReviews];
                     if (reviews.length > 0) {
-                        currentIndex = Math.floor(Math.random() * reviews.length);
+                        // Check if there's a newly submitted review to show
+                        const lastReviewIndex = sessionStorage.getItem('lastReviewIndex');
+                        if (lastReviewIndex !== null) {
+                            currentIndex = parseInt(lastReviewIndex);
+                            sessionStorage.removeItem('lastReviewIndex');
+                        } else {
+                            currentIndex = Math.floor(Math.random() * reviews.length);
+                        }
                         renderReview(currentIndex);
                         startSlideshow();
                     } else {

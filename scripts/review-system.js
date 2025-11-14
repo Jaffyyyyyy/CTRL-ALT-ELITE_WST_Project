@@ -83,6 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
         reviews.push(reviewData);
         localStorage.setItem('reviews', JSON.stringify(reviews));
 
+        // Store the index of the newly added review
+        sessionStorage.setItem('lastReviewIndex', reviews.length - 1);
+        
+        // Trigger storage event to reload reviews on the same page
+        window.dispatchEvent(new Event('storage'));
+
         const reviewModal = bootstrap.Modal.getInstance(reviewModalElement);
         reviewModal.hide();
 

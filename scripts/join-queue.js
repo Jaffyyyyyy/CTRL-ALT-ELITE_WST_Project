@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const validateCarPlate = (val) => {
-        if (!val) return true;
-        return /^[A-Z]{1,3}-[0-9]{1,4}$/.test(val);
+        if (!val) return false;
+        return /^[A-Z]{3}-[0-9]{4}$/.test(val);
     };
 
     if (carPlateInput) {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!carPlateInput.value.trim()) {
             carPlateInput.classList.add('is-invalid');
             isValid = false;
-        } else if (!/^[A-Z]{1,3}-[0-9]{1,4}$/.test(carPlateInput.value)) {
+        } else if (!/^[A-Z]{3}-[0-9]{4}$/.test(carPlateInput.value)) {
             carPlateInput.classList.add('is-invalid');
             isValid = false;
         } else {
