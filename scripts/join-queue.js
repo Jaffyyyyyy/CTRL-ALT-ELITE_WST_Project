@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const nameInput = document.getElementById('fullName');
     const carPlateInput = document.getElementById('carPlate');
+    const submitButton = document.getElementById('join-queue-btn');
+    const queuedContainer = document.querySelector('.queued-container');
+    const animationContainer = document.getElementById('animation-container');
 
     const formatAndValidateName = () => {
         let value = nameInput.value;
@@ -78,12 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const submitButton = form.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        submitButton.innerHTML = `
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Joining...
-        `;
+        
+        submitButton.style.display = 'none';
+        animationContainer.style.display = 'block';
 
         const customerData = {
             name: nameInput.value.trim(),
@@ -110,7 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         sessionStorage.setItem('myQueueId', newCustomer.id);
+        
+        setTimeout(() => {
+            animationContainer.style.display = 'none';
+            queuedContainer.style.display = 'block';
+        }, 2200);
 
-        window.location.href = `status.html?new=true`;
+        setTimeout(() => {
+            window.location.href = `status.html?new=true`;
+        }, 4000);
     });
 });

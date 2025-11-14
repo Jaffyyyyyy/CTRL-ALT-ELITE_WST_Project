@@ -114,8 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('remove-btn')) {
             const customerId = parseInt(e.target.getAttribute('data-id'));
             if (confirm('Are you sure you want to remove this customer?')) {
-                queueService.removeCustomer(customerId);
-                renderDashboard();
+                const row = e.target.closest('tr');
+                row.classList.add('queue-item-exiting');
+                setTimeout(() => {
+                    queueService.removeCustomer(customerId);
+                    renderDashboard();
+                }, 500);
             }
         }
     });
@@ -124,12 +128,40 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('status-select')) {
             const customerId = parseInt(e.target.getAttribute('data-id'));
             const newStatus = e.target.value;
-            queueService.updateCustomerStatus(customerId, newStatus);
+            if (newStatus === 'Completed') {
+                const row = e.target.closest('tr');
+                row.classList.add('queue-item-exiting');
+                setTimeout(() => {
+                    queueService.updateCustomerStatus(customerId, newStatus);
+                    renderDashboard();
+                }, 500);
+            } else {
+                queueService.updateCustomerStatus(customerId, newStatus);
+            }
         }
     });
 
     callNextBtn.addEventListener('click', () => {
-        queueService.callNextCustomer();
+        const state = queueService.getState();
+        const nowServingCustomer = state.customers.find(c => c.id === state.nowServing);
+
+        if (nowServingCustomer) {
+            const button = queueTableBodyEl.querySelector(`button[data-id="${nowServingCustomer.id}"]`);
+            if (button) {
+                const row = button.closest('tr');
+                row.classList.add('queue-item-exiting');
+                setTimeout(() => {
+                    queueService.callNextCustomer();
+                    renderDashboard();
+                }, 500);
+            } else {
+                queueService.callNextCustomer();
+                renderDashboard();
+            }
+        } else {
+            queueService.callNextCustomer();
+            renderDashboard();
+        }
     });
 
     clearQueueBtn.addEventListener('click', () => {
@@ -140,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderDashboard();
-    setInterval(renderDashboard, 5000);
 
     window.addEventListener('storage', () => {
         renderDashboard();
