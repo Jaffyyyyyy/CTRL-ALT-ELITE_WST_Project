@@ -42,6 +42,7 @@
                                     name: cust.name,
                                     email: cust.email,
                                     carPlate: cust.carPlate,
+                                    paymentMethod: cust.paymentMethod || 'Cash',
                                     status: cust.status,
                                     checkInTime: new Date().toISOString()
                                 };
